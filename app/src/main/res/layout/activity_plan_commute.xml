@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorButtonNormal"
+    android:paddingTop="?attr/actionBarSize"
+    tools:context="com.chrisking.publictransportapp.activities.plancommute.PlanCommuteActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="0dp"
+        android:orientation="horizontal"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/searchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:hint="@string/where_to_search_hint"
+                android:inputType="textPostalAddress"
+                android:maxLines="1"
+                android:nextFocusLeft="@id/searchText"
+                android:nextFocusUp="@id/searchText"
+                android:selectAllOnFocus="true"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/clearSearch"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="10dp"
+                android:background="@android:drawable/btn_dialog" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/regionSupport"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@android:color/holo_red_light"
+        android:text="@string/no_supported"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintVertical_bias="0.179" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        map:layout_constraintBottom_toTopOf="@+id/done"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+    <ImageView
+        android:id="@+id/callout"
+        android:layout_width="112dp"
+        android:layout_height="78dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/callout"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        map:layout_constraintBottom_toTopOf="@+id/pin"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        map:layout_constraintBottom_toTopOf="@+id/pin"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="8dp">
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/home"
+            android:contentDescription="@string/plan_commute_home_icon_description" />
+
+        <ImageView
+            android:id="@+id/work"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/work"
+            android:contentDescription="@string/plan_commute_work_icon_description" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/pin"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/x"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        map:layout_constraintBottom_toTopOf="@+id/done"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="0.501" />
+
+    <Button
+        android:id="@+id/done"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@color/colorLightPurple"
+        android:text="@string/where_to_done"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintVertical_bias="0.179" />
+
+    <ListView
+        android:id="@+id/addressList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:visibility="invisible"
+        map:layout_constraintBottom_toTopOf="@+id/done"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="@+id/map"
+        map:layout_constraintRight_toRightOf="@+id/map"
+        map:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        map:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

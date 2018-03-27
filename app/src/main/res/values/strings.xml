@@ -1,0 +1,197 @@
+<resources>
+    <string name="app_name">Public Transport App</string>
+
+    <string name="title_activity_where_to">Trip Planner</string>
+    <string name="title_activity_journey_options">Trip Options</string>
+    <string name="title_activity_itinerary_view">Your trip</string>
+    <string name="title_activity_view_on_map">Map</string>
+    <string name="title_activity_advanced">Settings</string>
+    <string name="title_activity_plan_commute">My Commute</string>
+    <string name="title_activity_learn_more">Learn More</string>
+    <string name="title_activity_taxi_queues">Taxi Queues</string>
+    <string name="title_activity_taxi_queues_configure">Advanced</string>
+    <string name="title_activity_search">Search</string>
+
+    <string name="rate_title">Rate</string>
+    <string name="rate_make_user_request_part_1">If you enjoy using</string>
+    <string name="rate_make_user_request_part_2">, please take a moment to rate it. Thanks for your support!</string>
+
+    <string name="menu_trip_planner">Trip Planner</string>
+    <string name="menu_taxi_queues">Queues</string>
+    <string name="menu_taxi_guide">Guide</string>
+    <string name="menu_my_commute">My Commute</string>
+    <string name="menu_city_select">Change city</string>
+    <string name="menu_survey">Take Survey</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+
+    <string name="where_to">Choose destination</string>
+    <string name="where_to_destination_hint">Pan and zoom to adjust</string>
+    <string name="where_to_done">Done</string>
+    <string name="where_to_search_hint">Address search</string>
+    <string name="where_to_tip_welcome">Welcome</string>
+    <string name="where_to_locaiton_set">Location set. Now choose your destination.</string>
+    <string name="where_to_tip_description">To plan a trip, position the map at your destination and then tap done.</string>
+    <string name="where_to_my_commute_not_setup_header">My Commute</string>
+    <string name="where_to_my_commute_not_setup_description">You have not set your home or work place. Would you like to do so now?</string>
+
+    <string name="plan_commute_home_added_success_message">Home location saved. Now do the same for your work, school or college place.</string>
+    <string name="plan_commute_work_added_success_message">Work, school or college location saved. Now do the same for your home place.</string>
+    <string name="plan_commute_success">Success</string>
+    <string name="plan_commute_error">Error</string>
+    <string name="plan_commute_same_location">Home and work locations cannot be the same.</string>
+    <string name="plan_commute_welcome">Welcome</string>
+    <string name="plan_commute_complete">All set!</string>
+    <string name="plan_commute_add_widget">If you haven\'t done so already, add the widget to your home screen.</string>
+    <string name="plan_commute_description">Find the places where you start and end your daily commute, such as your home and work place.</string>
+    <string name="plan_commute_done_incomplete_header">Tip</string>
+    <string name="plan_commute_done_incomplete_description">You need to set your home and work place by positioning the map and then tapping the appropriate icon.</string>
+    <string name="plan_commute_done_complete">Minimize the app, then long press the home screen to add a widget.</string>
+    <string name="plan_commute_home_icon_description">Home icon. Tap to set your home location.</string>
+    <string name="plan_commute_work_icon_description">Work icon. Tap to set your work location.</string>
+
+    <string name="main_learn_more">Learn more</string>
+    <string name="main_plan_journey">Trip planner</string>
+    <string name="main_plan_commute">Set your commute</string>
+    <string name="main_taxi_queues">Taxi queues</string>
+    <string name="main_sub_title">Be informed about your commute</string>
+    <string name="main_welcome">Welcome!</string>
+    <string name="main_advanced">Settings</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="itinerary_list_item_departing_in">Departing</string>
+    <string name="itinerary_list_item_start">Start</string>
+    <string name="itinerary_list_item_end">End</string>
+    <string name="itinerary_list_item_cost_est">Cost Est.</string>
+    <string name="itinerary_list_item_select_journey">Select journey</string>
+    <string name="itinerary_list_item_show_on_map">Show on map</string>
+
+    <string name="itinerary_view_list_item_walking">Walking</string>
+    <string name="itinerary_view_list_item_duration_header">Duration</string>
+    <string name="itinerary_view_list_item_cost_header">Approximate Cost</string>
+    <string name="itinerary_view_list_item_duration_header_walking">Walking time</string>
+    <string name="itinerary_view_list_item_hail_catch_taxi">Hail share taxi</string>
+    <string name="itinerary_view_list_item_your_location">Your location</string>
+    <string name="itinerary_view_list_item_home">Home</string>
+    <string name="itinerary_view_list_item_work">Work/ School</string>
+
+    <string name="mode_text_bus">Bus</string>
+    <string name="mode_text_rail">Train</string>
+    <string name="mode_text_air">Plane</string>
+    <string name="mode_text_ferry">Ferry</string>
+    <string name="mode_text_coach">Bus</string>
+    <string name="mode_select_text_coach">Coach</string>
+    <string name="mode_select_text_subway">Subway</string>
+    <string name="mode_text_subway">Train</string>
+    <string name="mode_text_lightrail">Tram</string>
+    <string name="mode_text_sharetaxi">Share Taxi</string>
+    <string name="mode_text_walk">Walk</string>
+    <string name="mode_text_default">Vehicle</string>
+
+    <string name="duration_unknown">Unknown</string>
+    <string name="duration_minutes">minutes</string>
+    <string name="duration_minute">minute</string>
+
+    <string name="location_required">Your location is required for the app to work. Please try again.</string>
+    <string name="title_error">Error</string>
+    <string name="title_success">Success</string>
+    <string name="fare_unknown">Unknown</string>
+    <string name="distance_unknown">Unknown</string>
+    <string name="no_results">No results found.</string>
+    <string name="error_check_internet">Check your connection and try again.</string>
+    <string name="not_now">not now</string>
+    <string name="do_not_show">don\'t show</string>
+    <string name="ok">ok</string>
+    <string name="yes">yes</string>
+    <string name="got_it">got it!</string>
+    <string name="home">home</string>
+    <string name="work">work</string>
+    <string name="no_supported">App not supported in your region</string>
+    <string name="not_supported_tip_title">Region Unsupported</string>
+    <string name="not_supported_tip_description">Unfortunately there is no public transport nearby your location. For a list of supported cities, please see the app store description.</string>
+    <string name="not_supported_tip_app_store">view app store</string>
+
+    <string name="learn_more_summary">View the state of your daily commute at a glance!</string>
+    <string name="learn_more_details">Simply set the start and end of your normal commute, such as your home and work place, then add the widget to your home screen.</string>
+    <string name="learn_more_privacy_header">Privacy and Acknowledgements:</string>
+    <string name="learn_more_wimt_platform">The app uses the WhereIsMyTransport platform:</string>
+    <string name="learn_more_wimt_web"><a href="https://www.whereismytransport.com/">Website</a></string>
+    <string name="learn_more_wimt_developers"><a href="https://developer.whereismytransport.com/">Developers</a></string>
+    <string name="learn_more_wimt_privacy"><a href="https://www.whereismytransport.com/privacy-policy">Privacy Policy</a></string>
+    <string name="learn_more_location_notice">Your location, including that of your home or work is never associated with your personal information and cannot be used to identify you. This information is also never distributed to 3rd party providers.</string>
+    <string name="learn_more_about">About</string>
+
+    <string name="taxiqueues_header">Avoid the queues!</string>
+    <string name="taxiqueues_description">drivers striking? Queues at a stand still? Let others know or get warned in advance and make alternate plans.</string>
+    <string name="taxiqueues_setup">Setup now</string>
+    <string name="taxiqueues_configure">Advanced</string>
+    <string name="taxiqueues_stop_using">Turn off</string>
+    <string name="taxiqueues_fetchinglocation">Getting location...</string>
+    <string name="taxiqueues_fetchingstops">Fetching nearby stops...</string>
+    <string name="taxiqueues_fetchinghomestops">Fetching home place stops...</string>
+    <string name="taxiqueues_fetchingworkstops">Fetching work place stops...</string>
+    <string name="taxiqueues_loadgingeofences">Loading geofences...</string>
+    <string name="taxiqueues_setupcomplete_1">stop you will receive a notificatioSetup complete! Next time you\'re at a</string>
+    <string name="taxiqueues_setupcomplete_2">n.</string>
+    <string name="taxiqueues_prompt_header">Avoid the queues!</string>
+    <string name="taxiqueues_prompt_description">s are often disrupted. Would you like to know how long the queues are?</string>
+    <string name="taxiqueues_removed_success_description">You will no longer be notified or asked about the length of a queue.</string>
+    <string name="taxiqueues_removed_failed_description">Something went horribly wrong. If you still get notified or asked about the length of a queue you should re-install the app.</string>
+    <string name="taxiqueues_subscribe_to_rank">Get notified when the queues change at </string>
+
+    <string name="about_hi">Hi</string>
+    <string name="about_intro">My name is Chris King, one of the co-founders of WhereIsMyTransport.</string>
+    <string name="about_why">I built this app for fun and to demonstrate some of the capabilities of our platform.</string>
+    <string name="about_sayhi">Seen as you made it this far, why not say hi on one of the channels below?</string>
+    <string name="about_version">v1.6</string>
+    <string name="about_open_source_title">Open source libraries used:</string>
+    <string name="about_transport_api_sdk"><a href="https://github.com/WhereIsMyTransport/TransportApiSdk.Java">TransportApiSdk</a></string>
+    <string name="about_segmented_button"><a href="https://github.com/ceryle/SegmentedButton">SegmentedButton</a></string>
+
+    <string name="advanced_profile_closest_to_time">Closest to time</string>
+    <string name="advanced_profile_fewest_transfers">Fewest transfers</string>
+    <string name="advanced_profile_header">Profile:</string>
+    <string name="advanced_modes_header">Modes:</string>
+    <string name="advanced_closest_to_time_description">Tells the trip planner to get you to your destination as soon as possible.</string>
+    <string name="advanced_fewest_transfers_description">Tells the trip planner to get you to your destination with as few transfers as possible.</string>
+    <string name="advanced_profile_saved">Profile saved.</string>
+    <string name="advanced_modes_saved">Modes saved.</string>
+    <string name="advanced_modes_description">Here you can tell the trip planner which modes of transport you prefer.</string>
+
+    <string name="search_choose_destination_tip">Choose destination...</string>
+    <string name="search_your_location_tip">Your location</string>
+    <string name="search_use_your_location">Your location</string>
+    <string name="search_choose_on_map">Choose on map</string>
+
+    <string name="filter_clear">Clear</string>
+    <string name="filter_set">Set Filter</string>
+    <string name="filter_time_type_depart_after">Depart After</string>
+    <string name="filter_time_type_arrive_before">Arrive Before</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="widget_depart">Depart</string>
+    <string name="widget_trip_home">Trip home:</string>
+    <string name="widget_trip_work">Trip to work/ school:</string>
+    <string name="widget_nothing_to_report">Nothing to report.</string>
+    <string name="widget_header">My Commute</string>
+    <string name="widget_configure_get_started">Get Started</string>
+    <string name="widget_additional_setup">Awaiting additional setup.</string>
+    <string name="widget_error_or_no_connection">Error or no internet - try again.</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_choose_location">Choose Location</string>
+
+    <string name="choose_location_on_map_done">Done</string>
+    <string name="choose_location_on_map_where_to">Choose location</string>
+    <string name="choose_location_on_map_location_hint">Pan and zoom to adjust</string>
+
+    <string name="city_select_title">Cities</string>
+    <string name="city_select_welcome_message">Welcome! Find your city.</string>
+
+</resources>

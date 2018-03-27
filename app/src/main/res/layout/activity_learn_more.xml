@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash"
+    android:paddingTop="?attr/actionBarSize"
+    tools:context="com.chrisking.publictransportapp.activities.learnmore.LearnMoreActivity">
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@color/colorLightPurple"
+        android:text="@string/learn_more_about"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/about"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/learn_more_summary"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/widgetpreview" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/learn_more_details"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/learn_more_privacy_header"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="@string/learn_more_wimt_platform"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:paddingTop="8dp"
+                android:text="@string/learn_more_wimt_web"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textColorLink="@color/colorLinks"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/developers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:paddingTop="8dp"
+                android:text="@string/learn_more_wimt_developers"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textColorLink="@color/colorLinks"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:paddingTop="8dp"
+                android:text="@string/learn_more_wimt_privacy"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textColorLink="@color/colorLinks"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="@string/learn_more_location_notice"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainText"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

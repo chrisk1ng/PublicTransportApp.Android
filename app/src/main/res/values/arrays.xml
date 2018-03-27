@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_items">
+        <item>Taxi Queues</item>
+        <item>My Commute</item>
+        <item>Trip Planner</item>
+        <item>Settings</item>
+        <item>About</item>
+    </string-array>
+</resources>

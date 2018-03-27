@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/tripPlanner"
+            android:title="@string/menu_trip_planner" />
+        <item
+            android:id="@+id/taxiQueues"
+            android:title="@string/menu_taxi_queues" />
+        <item
+            android:id="@+id/taxiGuide"
+            android:title="@string/menu_taxi_guide" />
+        <item
+            android:id="@+id/myCommute"
+            android:title="@string/menu_my_commute" />
+        <item
+            android:id="@+id/citySelect"
+            android:title="@string/menu_city_select" />
+        <item
+            android:id="@+id/surveyParticipate"
+            android:title="@string/menu_survey" />
+        <item
+            android:id="@+id/settings"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/about"
+            android:title="@string/menu_about" />
+    </group>
+
+</menu>

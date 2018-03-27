@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#7C70C2</color>
+
+    <color name="colorWalking">#808080</color>
+    <color name="colorDarkGray">#808080</color>
+    <color name="colorMainText">#ffffff</color>
+    <color name="colorWashedText">#80ffffff</color>
+    <color name="colorLinks">#30A6FF</color>
+
+    <color name="colorLightPurple">#8094DC</color>
+    <color name="colorDarkPurple">#7C70C2</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorLightGray">#BBBBBB</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorTransparentGray">#75BBBBBB</color>
+    <color name="colorDarkTransparentGray">#99808080</color>
+    <color name="colorItineraryCardHeading">#80FFFFFF</color>
+</resources>

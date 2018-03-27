@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <co.ceryle.segmentedbutton.SegmentedButtonGroup
+                android:id="@+id/segmentedButtonGroupTimeType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/timePicker"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:sbg_animateSelector="bounce"
+                app:sbg_animateSelectorDuration="1000"
+                app:sbg_backgroundColor="@color/colorLightGray"
+                app:sbg_dividerColor="#000000"
+                app:sbg_dividerPadding="10dp"
+                app:sbg_dividerRadius="10dp"
+                app:sbg_dividerSize="1dp"
+                app:sbg_position="0"
+                app:sbg_radius="2dp"
+                app:sbg_ripple="true"
+                app:sbg_rippleColor="@color/colorLightPurple"
+                app:sbg_selectorColor="@color/colorDarkPurple"
+                app:sbg_selectorTextColor="@color/colorMainText"
+                app:sbg_shadow="true"
+                app:sbg_shadowElevation="3dp"
+                app:sbg_shadowMargin="4dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="10dp"
+                    android:text="@string/filter_time_type_depart_after"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="10dp"
+                    android:text="@string/filter_time_type_arrive_before"
+                    android:textAllCaps="false" />
+            </co.ceryle.segmentedbutton.SegmentedButtonGroup>
+
+            <co.ceryle.segmentedbutton.SegmentedButtonGroup
+                android:id="@+id/segmentedButtonGroupProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/segmentedButtonGroupTimeType"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sbg_animateSelector="bounce"
+                app:sbg_animateSelectorDuration="1000"
+                app:sbg_backgroundColor="@color/colorLightGray"
+                app:sbg_dividerColor="#000000"
+                app:sbg_dividerPadding="10dp"
+                app:sbg_dividerRadius="10dp"
+                app:sbg_dividerSize="1dp"
+                app:sbg_position="0"
+                app:sbg_radius="2dp"
+                app:sbg_ripple="true"
+                app:sbg_rippleColor="@color/colorLightPurple"
+                app:sbg_selectorColor="@color/colorDarkPurple"
+                app:sbg_selectorTextColor="@color/colorMainText"
+                app:sbg_shadow="true"
+                app:sbg_shadowElevation="3dp"
+                app:sbg_shadowMargin="4dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="10dp"
+                    android:text="@string/advanced_profile_closest_to_time"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="10dp"
+                    android:text="@string/advanced_profile_fewest_transfers"
+                    android:textAllCaps="false" />
+            </co.ceryle.segmentedbutton.SegmentedButtonGroup>
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="166dp"
+
+                android:timePickerMode="spinner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="-16dp"
+                android:layout_weight="64.80"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/clearFilter"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="false"
+            android:layout_weight="1"
+            android:background="@color/colorLightGray"
+            android:text="@string/filter_clear"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/setFilter"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="false"
+            android:layout_weight="1"
+            android:background="@color/colorLightPurple"
+            android:text="@string/filter_set"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

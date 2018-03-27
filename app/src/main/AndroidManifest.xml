@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chrisking.publictransportapp">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".helpers.ApplicationExtension"
+        android:allowBackup="true"
+        android:icon="@drawable/businconrounded180"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/businconrounded180"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service android:name=".services.geofencing.GeofenceTrasitionService" />
+
+        <activity
+            android:name=".activities.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.journeyoptions.JourneyOptionsActivity"
+            android:label="@string/title_activity_journey_options"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.itinerary.ItineraryViewActivity"
+            android:label="@string/title_activity_itinerary_view"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.itinerary.SelectedItineraryListItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.map.ViewOnMapActivity"
+            android:label="@string/title_activity_view_on_map"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.about.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.whereto.FilterOverlay"
+            android:theme="@style/AppTheme.Popup" />
+
+        <service android:name=".services.notification.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".services.geofencing.GeofenceNotificationReceiver">
+            <intent-filter>
+                <action android:name="UNKNOWN_ACTION" />
+                <action android:name="NORMAL_ACTION" />
+                <action android:name="LONG_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.geofencing.GeofenceNotificationSubscribeReceiver">
+            <intent-filter>
+                <action android:name="YES_ACTION" />
+                <action android:name="NO_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".activities.widget.MyCommuteAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.chrisking.publictransportapp.DATA_FETCHED" />
+                <action android:name="com.chrisking.publictransportapp.ADDITIONAL_SETUP" />
+                <action android:name="com.chrisking.publictransportapp.ERROR_OR_NO_CONNECTION" />
+                <action android:name="com.chrisking.publictransportapp.REFRESH_TAP" />
+                <action android:name="com.chrisking.publictransportapp.OPEN_ITINERARY" />
+                <action android:name="com.chrisking.publictransportapp.HOME" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_commute_app_widget_info" />
+        </receiver>
+
+        <activity android:name=".activities.widget.MyCommuteAppWidgetConfigureActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".activities.widget.WidgetRemoteFetchService" />
+        <service
+            android:name=".activities.widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity android:name=".activities.journeyoptions.OverviewListItem" />
+        <activity
+            android:name=".activities.city.CitySelectorActivity"
+            android:noHistory="true"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.main.TripPlannerActivity"
+            android:label="@string/title_activity_where_to"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.queues.TaxiQueueSetupActivity"
+            android:theme="@style/NoTitle" />
+        <activity android:name=".activities.queues.TaxiQueueConfigureActivity" />
+        <activity
+            android:name=".activities.search.SearchActivity"
+            android:label="@string/title_activity_search" />
+        <activity
+            android:name=".activities.search.ChooseLocationActivity"
+            android:label="@string/title_activity_choose_location"></activity>
+    </application>
+
+</manifest>

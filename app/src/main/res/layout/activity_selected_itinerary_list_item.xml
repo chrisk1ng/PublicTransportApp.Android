@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:uber="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingRight="16dp"
+    tools:context="com.chrisking.publictransportapp.activities.itinerary.SelectedItineraryListItem">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/innerCard"
+        android:layout_width="335dp"
+        android:layout_height="0dp"
+        android:background="@color/common_google_signin_btn_text_light_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/durationHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/itinerary_view_list_item_duration_header"
+            android:textColor="@color/colorItineraryCardHeading"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="55 minutes"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white"
+            android:textSize="24dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/durationHeader" />
+
+        <TextView
+            android:id="@+id/agencyName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="MyCiti MyCiti MyCitit MyCiti"
+            android:textColor="@android:color/white"
+            android:textSize="24dp"
+            app:layout_constraintLeft_toRightOf="@+id/mode"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/costHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:text="@string/itinerary_view_list_item_cost_header"
+            android:textColor="@color/colorItineraryCardHeading"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duration" />
+
+        <TextView
+            android:id="@+id/vehicleDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Train 0192"
+            android:textColor="@color/colorItineraryCardHeading"
+            android:textSize="16dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/mode"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineName" />
+
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:text="23h59"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <TextView
+            android:id="@+id/serviceAlertsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:text="Service Alerts"
+            android:textColor="@color/colorItineraryCardHeading"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cost" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startTime">
+
+            <TextView
+                android:id="@+id/startLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Example stop name"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorItineraryCardHeading"
+                android:textSize="16dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/endTime" />
+
+            <TextView
+                android:id="@+id/endLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Example Stop name"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorItineraryCardHeading"
+                android:textSize="16dp"
+                tools:layout_editor_absoluteX="43dp"
+                tools:layout_editor_absoluteY="283dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="ZAR 100.00"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white"
+            android:textSize="25dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/costHeader" />
+
+        <ImageView
+            android:id="@+id/mode"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bus72" />
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="14h59"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginRight="31dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDetails"
+            android:layout_marginStart="31dp"
+            android:layout_marginEnd="31dp"></LinearLayout>
+
+        <TextView
+            android:id="@+id/serviceAlerts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="None"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/white"
+            android:textSize="25dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serviceAlertsHeader" />
+
+        <TextView
+            android:id="@+id/lineName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="107: Civic centre to Campsbay"
+            android:textColor="@color/colorItineraryCardHeading"
+            android:textSize="16dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/mode"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/agencyName" />
+
+        <LinearLayout
+            android:id="@+id/leftLine"
+            android:layout_width="13dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDetails"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightLine"
+            android:layout_width="13dp"
+            android:layout_height="6dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDetails"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/hollowcircle"
+            android:layout_marginTop="11dp"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDetails"
+            android:layout_marginRight="11dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="11dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/hollowcircle"
+            android:layout_marginTop="11dp"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDetails"
+            android:layout_marginLeft="11dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="11dp" />
+
+        <ImageView
+            android:id="@+id/map"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="0.25"
+            app:srcCompat="@drawable/map_view"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:uber="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linearLayout6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        uber:layout_constraintBottom_toBottomOf="parent"
+        uber:layout_constraintLeft_toLeftOf="parent"
+        uber:layout_constraintRight_toRightOf="parent">
+
+        <com.uber.sdk.android.rides.RideRequestButton
+            android:id="@+id/uberButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_weight="0.75"
+            uber:ub__style="black">
+
+        </com.uber.sdk.android.rides.RideRequestButton>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
