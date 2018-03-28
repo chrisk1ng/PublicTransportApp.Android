@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-	signingConfigs {
+    signingConfigs {
         configptapp {
 
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.chrisking.publictransportapp"
         minSdkVersion 17

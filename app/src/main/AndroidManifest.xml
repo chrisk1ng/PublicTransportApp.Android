@@ -131,7 +131,10 @@
             android:label="@string/title_activity_search" />
         <activity
             android:name=".activities.search.ChooseLocationActivity"
-            android:label="@string/title_activity_choose_location"></activity>
+            android:label="@string/title_activity_choose_location" />
+        <activity
+            android:name=".activities.tripsharing.TripSharingActivity"
+            android:label="@string/title_activity_trip_sharing"></activity>
     </application>
 
 </manifest>

@@ -193,5 +193,6 @@
 
     <string name="city_select_title">Cities</string>
     <string name="city_select_welcome_message">Welcome! Find your city.</string>
+    <string name="title_activity_trip_sharing">Trip Sharing</string>
 
 </resources>
