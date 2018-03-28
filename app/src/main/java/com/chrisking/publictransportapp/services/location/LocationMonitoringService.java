@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import com.chrisking.publictransportapp.classes.TripShare;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
+import com.flurry.android.FlurryAgent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -39,9 +40,11 @@ public class LocationMonitoringService extends Service implements
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String journeyId = intent.getStringExtra("journeyId");
-        int itineraryIndex = intent.getIntExtra("mItineraryIndex", 0);
+        int itineraryIndex = intent.getIntExtra("itineraryIndex", 0);
 
         mTripShareId = journeyId + String.valueOf(itineraryIndex);
+
+        ((ApplicationExtension) getApplicationContext()).setTripShareId(mTripShareId);
 
         mLocationClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -59,6 +62,8 @@ public class LocationMonitoringService extends Service implements
 
         mLocationRequest.setPriority(priority);
         mLocationClient.connect();
+
+        FlurryAgent.logEvent("ShareTrip");
 
         //Make it stick to the notification panel so it is less prone to get cancelled by the Operating System.
         return START_STICKY;
@@ -124,9 +129,13 @@ public class LocationMonitoringService extends Service implements
     public void onDestroy() {
 
 
+        LocationServices.FusedLocationApi.removeLocationUpdates(mLocationClient,this);
+        mLocationClient.disconnect();
         //Stop location sharing service to app server.........
 
         stopService(new Intent(this, LocationMonitoringService.class));
+
+        mDatabaseReference.child("tripshares").child(mTripShareId).removeValue();
 
         ((ApplicationExtension) getApplicationContext()).setIsBackgroundServiceRunning(false);
         //Ends................................................

@@ -1,19 +1,16 @@
 package com.chrisking.publictransportapp.activities.tripsharing;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.chrisking.publictransportapp.R;
-import com.chrisking.publictransportapp.activities.journeyoptions.JourneyAdapter;
-import com.chrisking.publictransportapp.activities.journeyoptions.JourneyOptionsActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
+import com.flurry.android.FlurryAgent;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,11 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import transportapisdk.TransportApiClient;
 import transportapisdk.TransportApiClientSettings;
 import transportapisdk.TransportApiResult;
@@ -46,9 +39,8 @@ import transportapisdk.models.LineString;
 public class TripSharingActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Itinerary mItinerary;
     private int mItineraryNumber = 0;
-    private String mJourneyId = "mM79WePyqEGdGKixAQTJXA";
+    private String mJourneyId;
     private DatabaseReference mDatabase;
     private String mLatitude;
     private String mLongitude;
@@ -66,8 +58,17 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("tripshares").child(mJourneyId + mItineraryNumber);
-        new GetJourneysTask().execute();
+        Intent intent = getIntent();
+
+        String uid = intent.getStringExtra("uid");
+
+        mJourneyId = uid.substring(0, uid.length() - 1);
+        mItineraryNumber = Integer.parseInt(uid.substring(uid.length() - 1));
+
+        FlurryAgent.logEvent("ViewSharedTrip");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("tripshares").child(uid);
+
     }
 
     @Override
@@ -76,6 +77,8 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
         mMap.getUiSettings().setTiltGesturesEnabled(false);
         mMap.setBuildingsEnabled(false);
         mMap.getUiSettings().setRotateGesturesEnabled(false);
+
+        new GetJourneysTask().execute();
     }
 
     private void drawMarker(String key, String value){
@@ -100,12 +103,12 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
         }
     }
 
-    private void addLines() {
+    private void addLines(Itinerary itinerary) {
         System.out.println("addLines() !!!!!");
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
         int count = 0;
-        for (Leg leg: mItinerary.getLegs()){
+        for (Leg leg: itinerary.getLegs()){
             int color;
             if (leg.getLine() == null) {
                 color = ContextCompat.getColor(this, R.color.colorWalking);
@@ -157,6 +160,8 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
                             @Override
                             public void onChildRemoved(DataSnapshot dataSnapshot) {
                                 mMarker.remove();
+
+                                showTripSharingEnded();
                             }
 
                             @Override
@@ -176,6 +181,18 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
                 });
             }
         });
+    }
+
+    private void showTripSharingEnded(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.trip_share_alert_title)
+                .setMessage(R.string.trip_share_alert_sharing_ended)
+                .setPositiveButton(R.string.got_it, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     private class GetJourneysTask extends AsyncTask<Void, Void, TransportApiResult<Journey>> {
@@ -198,8 +215,7 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
                 System.out.println(getResources().getString(R.string.no_results));
                 return;
             }
-            mItinerary = journey.data.getItineraries().get(mItineraryNumber);
-            addLines();
+            addLines(journey.data.getItineraries().get(mItineraryNumber));
         }
     }
 }

@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="0"
             app:srcCompat="@drawable/ic_menu_share" />
 
@@ -41,7 +41,7 @@
             android:layout_margin="8dp"
             android:layout_weight="0"
             android:background="@drawable/action_button_rounded_corners"
-            android:text="STOP"
+            android:text="@string/trip_share_stop"
             android:textColor="@android:color/white" />
     </LinearLayout>
 

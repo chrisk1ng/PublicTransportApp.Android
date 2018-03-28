@@ -27,6 +27,8 @@
 
     <string name="where_to">Choose destination</string>
     <string name="where_to_destination_hint">Pan and zoom to adjust</string>
+    <string name="where_to_options">Options</string>
+    <string name="where_to_change_location">Change your starting point</string>
     <string name="where_to_done">Done</string>
     <string name="where_to_search_hint">Address search</string>
     <string name="where_to_tip_welcome">Welcome</string>
@@ -145,7 +147,7 @@
     <string name="about_intro">My name is Chris King, one of the co-founders of WhereIsMyTransport.</string>
     <string name="about_why">I built this app for fun and to demonstrate some of the capabilities of our platform.</string>
     <string name="about_sayhi">Seen as you made it this far, why not say hi on one of the channels below?</string>
-    <string name="about_version">v1.6</string>
+    <string name="about_version">v1.7</string>
     <string name="about_open_source_title">Open source libraries used:</string>
     <string name="about_transport_api_sdk"><a href="https://github.com/WhereIsMyTransport/TransportApiSdk.Java">TransportApiSdk</a></string>
     <string name="about_segmented_button"><a href="https://github.com/ceryle/SegmentedButton">SegmentedButton</a></string>
@@ -199,5 +201,7 @@
     <string name="trip_share_alert_message">Would you like to start sharing your location with your friends now?</string>
     <string name="trip_share_active_trip">You\'re currently on a trip.</string>
     <string name="trip_share_alert_already_sharing">You\'re already sharing a trip, please stop the current trip before sharing this one.</string>
+    <string name="trip_share_alert_sharing_ended">Your friend is no longer sharing their trip.</string>
+    <string name="trip_share_stop">STOP</string>
 
 </resources>

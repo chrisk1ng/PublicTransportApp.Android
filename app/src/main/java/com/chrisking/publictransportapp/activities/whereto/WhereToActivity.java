@@ -39,6 +39,7 @@ import com.chrisking.publictransportapp.classes.TaxiPrompter;
 import com.chrisking.publictransportapp.classes.TripShare;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.helpers.Shortcuts;
+import com.chrisking.publictransportapp.services.location.LocationMonitoringService;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -59,6 +60,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.location.LocationListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 
 import java.util.Date;
 import java.util.List;
@@ -86,7 +89,7 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
     private LatLng mStoredUserLocation;
     private LatLng endLocation;
     private LinearLayout mWhereToLayout;
-    private RelativeLayout mFilterButton;
+    private LinearLayout mFilterButton;
     private ImageView mFilterImageView;
     private Profile mProfile = Profile.ClosestToTime;
     private TimeType mTimeType = TimeType.DepartAfter;
@@ -94,6 +97,8 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
     private Button mRegionSupportButton;
     private ImageView mHomeImageView;
     private ImageView mWorkImageView;
+    private LinearLayout mActiveTripLayout;
+    private Button mTripShareStopButton;
 
     private void displayTip(){
         SharedPreferences prefs = getActivity().getSharedPreferences("tips", 0);
@@ -137,6 +142,15 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
                 .show();
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        showOnTrip(false);
+    }
+
+
     private void init(final View view, final Activity activity)
     {
         mPrefs = getActivity().getSharedPreferences("settings", 0);
@@ -152,9 +166,9 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
                     double homeLatitude = Double.parseDouble(homeLatlong[0]);
                     double homeLongitude = Double.parseDouble(homeLatlong[1]);
 
-                    //move map camera
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(homeLatitude, homeLongitude)));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                    endLocation = new LatLng(homeLatitude, homeLongitude);
+
+                    planJourney();
                 }
                 else{
                     displayMyCommuteNotSetupTip();
@@ -173,9 +187,9 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
                     double workLatitude = Double.parseDouble(workLatlong[0]);
                     double workLongitude = Double.parseDouble(workLatlong[1]);
 
-                    //move map camera
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(workLatitude, workLongitude)));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                    endLocation = new LatLng(workLatitude, workLongitude);
+
+                    planJourney();
                 }
                 else{
                     displayMyCommuteNotSetupTip();
@@ -192,7 +206,7 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
             }
         });
 
-        mFilterButton = (RelativeLayout) view.findViewById(R.id.filter);
+        mFilterButton = (LinearLayout) view.findViewById(R.id.filter);
         mFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +227,26 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
             }
         });
 
+        mActiveTripLayout = (LinearLayout) view.findViewById(R.id.activeTripLayout);
+        mActiveTripLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = ((ApplicationExtension) getActivity().getApplicationContext()).getTripShareId();
+
+                sendShareLink(uid);
+            }
+        });
+
+        mTripShareStopButton = (Button) view.findViewById(R.id.tripShareStopButton);
+        mTripShareStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LocationMonitoringService.class);
+                getActivity().stopService(intent);
+                showOnTrip(true);
+            }
+        });
+
         mDoneButton = (Button) view.findViewById(R.id.done);
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,33 +254,71 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
 
                 endLocation = mMap.getCameraPosition().target;
 
-                if (mStartLocation == null){
-                    showNoStartLocationAlert();
-                }
-                else {
-                    Intent push = new Intent(activity, JourneyOptionsActivity.class);
-                    push.putExtra("startLocation", mStartLocation);
-                    push.putExtra("endLocation", endLocation);
-                    if (mProfile == Profile.FewestTransfers)
-                            push.putExtra("Profile", "FewestTransfers");
-                    else
-                            push.putExtra("Profile", "ClosestToTime");
-
-                    if (mTimeType == TimeType.ArriveBefore)
-                            push.putExtra("TimeType", "ArriveBefore");
-                    else
-                            push.putExtra("TimeType", "DepartAfter");
-
-                    if (mTime != null)
-                        push.putExtra("Time", mTime);
-
-                    FlurryAgent.logEvent("PlanJourney");
-                    startActivity(push);
-                }
+                planJourney();
             }
         });
 
 
+    }
+
+    private void planJourney(){
+        if (mStartLocation == null){
+            showNoStartLocationAlert();
+        }
+        else {
+            Intent push = new Intent(getActivity(), JourneyOptionsActivity.class);
+            push.putExtra("startLocation", mStartLocation);
+            push.putExtra("endLocation", endLocation);
+            if (mProfile == Profile.FewestTransfers)
+                push.putExtra("Profile", "FewestTransfers");
+            else
+                push.putExtra("Profile", "ClosestToTime");
+
+            if (mTimeType == TimeType.ArriveBefore)
+                push.putExtra("TimeType", "ArriveBefore");
+            else
+                push.putExtra("TimeType", "DepartAfter");
+
+            if (mTime != null)
+                push.putExtra("Time", mTime);
+
+            FlurryAgent.logEvent("PlanJourney");
+            startActivity(push);
+        }
+    }
+
+    public void sendShareLink(String uid){
+        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(Uri.parse("https://insta.trip?uid=" + uid))
+                .setDynamicLinkDomain("enc6m.app.goo.gl")
+                // Open links with this app on Android
+                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+                // Open links with com.example.ios on iOS
+                //.setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
+                .buildDynamicLink();
+
+        Uri dynamicLinkUri = dynamicLink.getUri();
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = dynamicLinkUri.toString();
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "InstaTrip");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    private void showOnTrip(boolean forced){
+        if (forced)
+        {
+            mActiveTripLayout.setVisibility(View.GONE);
+            return;
+        }
+        if (!((ApplicationExtension) getActivity().getApplicationContext()).getIsBackgroundServiceRunning()) {
+            mActiveTripLayout.setVisibility(View.GONE);
+        }
+        else{
+            mActiveTripLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void hideKeyBoard(){
@@ -286,8 +358,6 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
 
             TaxiPrompter.app_launched(getActivity(), getFragmentManager());
         }
-
-
     }
 
     /**

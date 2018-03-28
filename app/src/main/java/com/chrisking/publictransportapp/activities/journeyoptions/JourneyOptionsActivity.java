@@ -1,5 +1,6 @@
 package com.chrisking.publictransportapp.activities.journeyoptions;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.itinerary.ItineraryViewActivity;
 import com.chrisking.publictransportapp.activities.main.MainActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
+import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.chrisking.publictransportapp.services.location.LocationMonitoringService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.dynamiclinks.DynamicLink;
@@ -139,6 +141,12 @@ public class JourneyOptionsActivity extends AppCompatActivity {
         //This method will executed only once.
 
         if (!((ApplicationExtension) getApplicationContext()).getIsBackgroundServiceRunning()) {
+
+            if(Shortcuts.isMyServiceRunning(this, LocationMonitoringService.class))
+            {
+                Intent intent = new Intent(this, LocationMonitoringService.class);
+                stopService(intent);
+            }
 
             //Start location sharing service to app server.........
             Intent intent = new Intent(this, LocationMonitoringService.class);

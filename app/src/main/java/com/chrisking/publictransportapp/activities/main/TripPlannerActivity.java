@@ -23,6 +23,7 @@ import com.chrisking.publictransportapp.activities.city.CityPersistence;
 import com.chrisking.publictransportapp.activities.city.CitySelectorActivity;
 import com.chrisking.publictransportapp.activities.queues.TaxiQueues;
 import com.chrisking.publictransportapp.activities.settings.AdvancedOptionsActivity;
+import com.chrisking.publictransportapp.activities.tripsharing.TripSharingActivity;
 import com.chrisking.publictransportapp.activities.whereto.WhereToActivity;
 import com.chrisking.publictransportapp.classes.City;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,9 +99,9 @@ public class TripPlannerActivity extends AppCompatActivity
                         // [START_EXCLUDE]
 
                         if (deepLink != null && uid != null) {
-                                //Intent intent = new Intent(getApplicationContext(), LanceClassHere.class);
-                                //intent.putExtra("uid", uid);
-                                //startActivity(intent);
+                            Intent intent = new Intent(getApplicationContext(), TripSharingActivity.class);
+                            intent.putExtra("uid", uid);
+                            startActivity(intent);
                         }
                         // [END_EXCLUDE]
                     }

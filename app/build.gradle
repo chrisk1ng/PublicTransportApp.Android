@@ -38,7 +38,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:11.2.0'
     compile 'com.google.android.gms:play-services-location:11.2.0'
     compile 'com.whereismytransport.transportapisdk:transportapisdk:1.0.1'
-    compile 'com.flurry.android:analytics:7.0.0@aar'
+    compile 'com.flurry.android:analytics:8.2.0@aar'
     compile 'com.github.ceryle:SegmentedButton:v1.2.2'
     compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.uber.sdk:rides-android:0.6.1'

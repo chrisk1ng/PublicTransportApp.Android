@@ -16,7 +16,9 @@ public class ApplicationExtension extends Application {
     private Itinerary mItinerary;
     private ArrayList<Itinerary> mItineraries;
     private static Context mContext;
+    private String tripShareId;
 
+    public String getTripShareId() {return tripShareId;}
     public boolean getIsBackgroundServiceRunning() {return backgroundServiceRunning;}
     public boolean getIsCommute() {return mIsCommute;}
     public boolean getIsCommuteHome() {return mIsCommuteHome;}
@@ -31,6 +33,7 @@ public class ApplicationExtension extends Application {
     public void setIsCommute(boolean isCommute, boolean isCommuteHome) {this.mIsCommute = isCommute; this.mIsCommuteHome = isCommuteHome;}
     public void setItinerary(Itinerary itinerary) {this.mItinerary = itinerary;}
     public void setItineraries(ArrayList<Itinerary> itineraries) {this.mItineraries = itineraries;}
+    public void setTripShareId(String tripShareId) {this.tripShareId = tripShareId;}
 
     @Override
     public void onCreate() {
