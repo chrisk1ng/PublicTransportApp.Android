@@ -12,10 +12,12 @@ import transportapisdk.models.Itinerary;
 public class ApplicationExtension extends Application {
     private boolean mIsCommute = false;
     private boolean mIsCommuteHome = false;
+    private boolean backgroundServiceRunning = false;
     private Itinerary mItinerary;
     private ArrayList<Itinerary> mItineraries;
     private static Context mContext;
 
+    public boolean getIsBackgroundServiceRunning() {return backgroundServiceRunning;}
     public boolean getIsCommute() {return mIsCommute;}
     public boolean getIsCommuteHome() {return mIsCommuteHome;}
     public Itinerary getItinerary() {return mItinerary;}
@@ -25,6 +27,7 @@ public class ApplicationExtension extends Application {
         return Credentials.ClientSecret;
     }
 
+    public void setIsBackgroundServiceRunning(boolean isRunning){ this.backgroundServiceRunning = isRunning; }
     public void setIsCommute(boolean isCommute, boolean isCommuteHome) {this.mIsCommute = isCommute; this.mIsCommuteHome = isCommuteHome;}
     public void setItinerary(Itinerary itinerary) {this.mItinerary = itinerary;}
     public void setItineraries(ArrayList<Itinerary> itineraries) {this.mItineraries = itineraries;}

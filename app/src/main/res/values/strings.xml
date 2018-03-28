@@ -194,4 +194,7 @@
     <string name="city_select_title">Cities</string>
     <string name="city_select_welcome_message">Welcome! Find your city.</string>
 
+    <string name="trip_share_alert_title">InstaTrip</string>
+    <string name="trip_share_alert_message">Would you like to start sharing your location with your friends now?</string>
+
 </resources>

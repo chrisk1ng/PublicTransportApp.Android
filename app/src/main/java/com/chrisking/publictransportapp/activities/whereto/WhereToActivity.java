@@ -3,6 +3,7 @@ package com.chrisking.publictransportapp.activities.whereto;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,7 +34,9 @@ import com.chrisking.publictransportapp.activities.plancommute.PlanCommuteActivi
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.search.SearchActivity;
 import com.chrisking.publictransportapp.classes.AppRater;
+import com.chrisking.publictransportapp.classes.QueueState;
 import com.chrisking.publictransportapp.classes.TaxiPrompter;
+import com.chrisking.publictransportapp.classes.TripShare;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.flurry.android.FlurryAgent;
@@ -54,7 +57,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.location.LocationListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.List;
 import transportapisdk.AgencyQueryOptions;
 import transportapisdk.TransportApiClient;
@@ -211,6 +217,7 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
         mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 endLocation = mMap.getCameraPosition().target;
 
                 if (mStartLocation == null){
@@ -279,6 +286,8 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
 
             TaxiPrompter.app_launched(getActivity(), getFragmentManager());
         }
+
+
     }
 
     /**

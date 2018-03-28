@@ -1,5 +1,7 @@
 package com.chrisking.publictransportapp.activities.main;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -23,6 +25,10 @@ import com.chrisking.publictransportapp.activities.queues.TaxiQueues;
 import com.chrisking.publictransportapp.activities.settings.AdvancedOptionsActivity;
 import com.chrisking.publictransportapp.activities.whereto.WhereToActivity;
 import com.chrisking.publictransportapp.classes.City;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 public class TripPlannerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -76,6 +82,35 @@ public class TripPlannerActivity extends AppCompatActivity
         TextView cityNameTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.cityTextView);
         cityNameTextView.setText(savedCity.getName());
 
+        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData data) {
+                        if (data == null) {
+                            return;
+                        }
+
+                        // Get the deep link
+                        Uri deepLink = data.getLink();
+                        String uid = deepLink.getQueryParameter("uid");
+
+                        // Handle the deep link
+                        // [START_EXCLUDE]
+
+                        if (deepLink != null && uid != null) {
+                                //Intent intent = new Intent(getApplicationContext(), LanceClassHere.class);
+                                //intent.putExtra("uid", uid);
+                                //startActivity(intent);
+                        }
+                        // [END_EXCLUDE]
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     @Override
