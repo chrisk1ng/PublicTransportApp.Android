@@ -1,6 +1,8 @@
 package com.chrisking.publictransportapp.activities.journeyoptions;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,11 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.chrisking.publictransportapp.R;
+import com.chrisking.publictransportapp.activities.itinerary.ItineraryViewActivity;
+import com.chrisking.publictransportapp.activities.main.MainActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.services.location.LocationMonitoringService;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,6 +52,9 @@ public class JourneyOptionsActivity extends AppCompatActivity {
     private TimeType mTimeType = TimeType.DepartAfter;
     private String mTime = null;
     private String mJourneyId;
+    private LinearLayout mActiveTripLayout;
+    private Button mTripShareStopButton;
+    private String mUid;
 
     // Define the api client.
     protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret()));
@@ -98,10 +107,28 @@ public class JourneyOptionsActivity extends AppCompatActivity {
 
         mResultInfoTextView = (TextView) findViewById(R.id.resultInfo);
         mResultInfoTextView.setVisibility(View.INVISIBLE);
+        mActiveTripLayout = (LinearLayout) findViewById(R.id.activeTripLayout);
+        mActiveTripLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendShareLink(mUid);
+            }
+        });
+
+        mTripShareStopButton = (Button) findViewById(R.id.tripShareStopButton);
+        mTripShareStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LocationMonitoringService.class);
+                stopService(intent);
+                showOnTrip(true);
+            }
+        });
 
         mPrefs = this.getSharedPreferences("settings", 0);
 
         loadJourneySettings();
+        showOnTrip(false);
 
         new GetJourneysTask().execute();
     }
@@ -121,9 +148,21 @@ public class JourneyOptionsActivity extends AppCompatActivity {
             startService(intent);
 
             ((ApplicationExtension) getApplicationContext()).setIsBackgroundServiceRunning(true);
-
-            sendShareLink(mJourneyId + String.valueOf(itineraryIndex));
+            mUid = mJourneyId + String.valueOf(itineraryIndex);
+            sendShareLink(mUid);
+            showOnTrip(false);
             //Ends................................................
+        }
+        else{
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.trip_share_alert_title)
+                    .setMessage(R.string.trip_share_alert_already_sharing)
+                    .setPositiveButton(R.string.got_it, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -145,6 +184,21 @@ public class JourneyOptionsActivity extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "InstaTrip");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    private void showOnTrip(boolean forced){
+        if (forced)
+        {
+            mActiveTripLayout.setVisibility(View.GONE);
+            return;
+
+        }
+        if (!((ApplicationExtension) getApplicationContext()).getIsBackgroundServiceRunning()) {
+            mActiveTripLayout.setVisibility(View.GONE);
+        }
+        else{
+            mActiveTripLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

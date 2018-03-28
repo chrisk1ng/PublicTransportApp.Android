@@ -12,7 +12,7 @@
 
     <color name="colorLightPurple">#8094DC</color>
     <color name="colorDarkPurple">#7C70C2</color>
-    <color name="colorRed">#FF0000</color>
+    <color name="colorRed">#ff0000</color>
     <color name="colorLightGray">#BBBBBB</color>
     <color name="colorBlack">#000000</color>
     <color name="colorTransparentGray">#75BBBBBB</color>
