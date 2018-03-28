@@ -25,36 +25,87 @@
             android:orientation="vertical"
             android:padding="4dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorLightGray"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    android:id="@+id/tv_operator_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="0"
+                    android:text="@string/placeholder_operatorguide_name"
+                    android:background="@color/uber_white"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="36sp" />
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/tv_operator_heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="0"
+                    android:text="@string/placeholder_operatorguide_heading"
+                    android:background="@color/uber_white"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/image_operator_guide"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="0"
+                    android:visibility="visible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:srcCompat="@drawable/magicbus" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100dp">
+                    <TextView
+                        android:background="@color/uber_white"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/tv_operator_usage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="0"
+                        android:text="@string/placeholder_operatorguide_usage"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="24sp" />
+                </LinearLayout>
+                <TextView
+                    android:background="@color/uber_white"
+                    android:layout_margin="8dp"
+                    android:id="@+id/tv_operator_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="0"
+                    android:text="@string/placeholder_operatorguide_description"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp" />
+
+
+
+            </LinearLayout>
+
 
         </ScrollView>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/colorDarkPurple"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="0"
-                android:text="@string/city_select_title"
-                android:textColor="@color/colorMainText"
-                android:textSize="48sp" />
-
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/cityListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

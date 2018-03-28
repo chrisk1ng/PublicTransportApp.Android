@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.main.TripPlannerActivity;
+import com.chrisking.publictransportapp.activities.operatorguide.OperatorGuideActivity;
 import com.chrisking.publictransportapp.classes.City;
 
 public class CitySelectorActivity extends AppCompatActivity {
@@ -80,4 +81,6 @@ public class CitySelectorActivity extends AppCompatActivity {
 
         startActivity(push);
     }
+
+
 }
