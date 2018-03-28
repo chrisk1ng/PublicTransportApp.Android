@@ -1,6 +1,6 @@
 # PublicTransportApp.Android
 
-## To build project add the following files:
+## To build project add the following files :
 * Credentials.java to the helpers folder
 * google_maps_api.xml to the resources folder
 * google-services.json to the app folder
