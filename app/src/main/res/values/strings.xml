@@ -195,4 +195,9 @@
     <string name="city_select_welcome_message">Welcome! Find your city.</string>
     <string name="title_activity_trip_sharing">Trip Sharing</string>
 
+    <string name="trip_share_alert_title">InstaTrip</string>
+    <string name="trip_share_alert_message">Would you like to start sharing your location with your friends now?</string>
+    <string name="trip_share_active_trip">You\'re currently on a trip.</string>
+    <string name="trip_share_alert_already_sharing">You\'re already sharing a trip, please stop the current trip before sharing this one.</string>
+
 </resources>
