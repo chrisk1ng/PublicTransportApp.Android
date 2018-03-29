@@ -62,6 +62,9 @@
         <activity
             android:name=".activities.whereto.FilterOverlay"
             android:theme="@style/AppTheme.Popup" />
+        <activity
+            android:name=".activities.operatorguide.OperatorGuideActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".services.notification.NotificationService">
             <intent-filter>
