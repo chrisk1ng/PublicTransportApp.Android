@@ -199,11 +199,7 @@ public class TripPlannerActivity extends AppCompatActivity
             push.putExtra("menu", true);
             startActivity(push);
         }
-        else if (id == R.id.surveyParticipate) {
-            Intent push = new Intent(TripPlannerActivity.this, CitySelectorActivity.class);
-
-            startActivity(push);
-        } else if (id == R.id.settings) {
+        else if (id == R.id.settings) {
             Fragment myFragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.title_activity_advanced));
             if (myFragment == null || !myFragment.isVisible()) {
                 fragmentManager.beginTransaction()

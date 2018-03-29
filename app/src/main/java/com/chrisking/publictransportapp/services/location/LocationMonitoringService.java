@@ -21,6 +21,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
+
 
 /**
  * Created by devdeeds.com on 27-09-2017.
@@ -115,6 +117,7 @@ public class LocationMonitoringService extends Service implements
                 trip.setUid(mTripShareId);
                 trip.setLatitude(String.valueOf(location.getLatitude()));
                 trip.setLongitude(String.valueOf(location.getLongitude()));
+                trip.setDatetime(new Date().getTime());
                 mDatabaseReference.child("tripshares").child(trip.getUid()).setValue(trip);
         }
     }
