@@ -311,15 +311,15 @@ public final class Shortcuts {
 
             case "dar es salaam taxis":
             case "daladala":
-                //TODO: Dar es Salaam
+                //Dar es Salaam
                 return "file:///android_asset/daladala.htm";
             case "combi":
             case "gabarone kombi's":
-                //TODO: Gabarone Combis
-                return "file:///android_asset/generic.htm";
+                //Gabarone
+                return "file:///android_asset/gabarone.htm";
             case "kigali taxis":
-                //Kigali Taxis - default to generic
-                return "file:///android_asset/generic.htm";
+                //Kigali Taxis
+                return "file:///android_asset/kigali.htm";
             case "minibus":
             case "lusaka taxi project":
             case "ma bus":

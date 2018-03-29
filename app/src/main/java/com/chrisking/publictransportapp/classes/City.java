@@ -1,6 +1,7 @@
 package com.chrisking.publictransportapp.classes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by ChrisKing on 2017/07/08.
@@ -70,6 +71,15 @@ public class City {
         cities.add(new City("Salé", "Morocco", false));
         cities.add(new City("Tshwane", "South Africa", "Taxi", true));
         cities.add(new City("Other", "Unknown", false));
+        cities.add(new City("Kigali", "Rwanda", "Kigali taxis", true));
+
+        java.util.Collections.sort(cities,new Comparator<City>() {
+            @Override
+            public int compare(City p1, City p2) {
+                // return p1.age+"".compareTo(p2.age+""); //sort by age
+                return p1.name.compareTo(p2.name); // if you want to short by name
+            }
+        });
 
         return cities;
     }
