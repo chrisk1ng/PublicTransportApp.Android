@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
+import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +28,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 import java.util.List;
 import transportapisdk.TransportApiClient;
 import transportapisdk.TransportApiClientSettings;
@@ -44,6 +47,9 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
     private DatabaseReference mDatabase;
     private String mLatitude;
     private String mLongitude;
+    private float mZoomLevel = 14;
+    private boolean mFinishedLoading = false;
+    private String mTimeAgo = "Unknown";
     public Marker mMarker;
 
     // Define the api client.
@@ -83,6 +89,9 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
 
     private void drawMarker(String key, String value){
         if(mMarker != null){
+            if(mFinishedLoading) {
+                mZoomLevel = mMap.getCameraPosition().zoom;
+            }
             mMarker.remove();
         }
         if(key.equals("latitude")){
@@ -91,20 +100,34 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
         if(key.equals("longitude")){
             mLongitude = value;
         }
+        if(key.equals("datetime")){
+            Date time = new Date(Long.parseLong(value));
+            mTimeAgo = Shortcuts.timeUntil(time);
+        }
 
         if(mLatitude != null && mLongitude != null){
             LatLng latLng = new LatLng(Double.parseDouble(mLatitude) , Double.parseDouble(mLongitude));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, mZoomLevel), new GoogleMap.CancelableCallback() {
+                @Override
+                public void onFinish() {
+                    mFinishedLoading = true;
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
             mMarker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(Double.parseDouble(mLatitude), Double.parseDouble(mLongitude)))
                     .title("Current Location")
-                    .snippet("33 seconds ago")
+                    .snippet(mTimeAgo)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            mMarker.showInfoWindow();
         }
     }
 
     private void addLines(Itinerary itinerary) {
-        System.out.println("addLines() !!!!!");
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
         int count = 0;
@@ -139,44 +162,38 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
             @Override
             public void onMapLoaded() {
                 /**set animated zoom camera into map*/
-                mMap.animateCamera(cu, new GoogleMap.CancelableCallback() {
+                mMap.animateCamera(cu);
+
+                mDatabase.addChildEventListener(new ChildEventListener() {
                     @Override
-                    public void onFinish() {
-                        mDatabase.addChildEventListener(new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                String key = dataSnapshot.getKey();
-                                String value = dataSnapshot.getValue(String.class);
-                                drawMarker(key, value);
-                            }
-
-                            @Override
-                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                                String key = dataSnapshot.getKey();
-                                String value = dataSnapshot.getValue(String.class);
-                                drawMarker(key, value);
-                            }
-
-                            @Override
-                            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                                mMarker.remove();
-
-                                showTripSharingEnded();
-                            }
-
-                            @Override
-                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        String key = dataSnapshot.getKey();
+                        String value = dataSnapshot.getValue().toString();
+                        drawMarker(key, value);
                     }
 
                     @Override
-                    public void onCancel() {
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        String key = dataSnapshot.getKey();
+                        String value = dataSnapshot.getValue().toString();
+                        drawMarker(key, value);
+                    }
 
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        mMarker.remove();
+                        String key = dataSnapshot.getKey();
+                        if(key.equals("latitude")){
+                            showTripSharingEnded();
+                        }
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
                     }
                 });
             }
