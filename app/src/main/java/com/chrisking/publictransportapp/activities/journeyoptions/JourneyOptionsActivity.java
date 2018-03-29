@@ -211,7 +211,7 @@ public class JourneyOptionsActivity extends AppCompatActivity {
                             dynamicLinkUri = dynamicLink.getUri();
                         }
 
-                        String shareText = getResources().getString(R.string.trip_share_share_text) + dynamicLinkUri.toString();
+                        String shareText = getResources().getString(R.string.trip_share_share_text) + " " + dynamicLinkUri.toString();
                         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                         sharingIntent.setType("text/plain");
                         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "InstaTrip");
