@@ -11,7 +11,7 @@
 package com.chrisking.publictransportapp.helpers;
 
 public final class Credentials {
-    public final static String ClientId = "<ADD_YOUR_CLIENT_ID_HERE>";
+    public final static String ClientId = "developerportalpostman_identityapi";
     public final static String ClientSecret = "<ADD_YOUR_CLIENT_SECRET_HERE>";
     public final static String FlurryKey = "<ADD_YOUR_FLURRY_KEY_HERE>";
 }

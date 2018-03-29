@@ -88,7 +88,7 @@ public class TripPlannerActivity extends AppCompatActivity
 
     public final void startOperatorGuideActivity() {
         Intent testIntent = new Intent(TripPlannerActivity.this, OperatorGuideActivity.class);
-        testIntent.putExtra("taxiName", savedCityTaxiName);
+        testIntent.putExtra(Intent.EXTRA_TEXT, savedCityTaxiName);
 
         startActivity(testIntent);
     }
