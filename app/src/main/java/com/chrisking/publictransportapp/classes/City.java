@@ -54,14 +54,14 @@ public class City {
         cities.add(new City("Cape Town", "South Africa", "Taxi", true));
         cities.add(new City("Casablanca", "Morocco", false));
         cities.add(new City("Constantine", "Algeria", false));
-        cities.add(new City("Dar es Salaam", "Tanzania", false));
+        cities.add(new City("Dar es Salaam", "Tanzania", "daladala", true));
         cities.add(new City("Dubai", "UAE", false));
         cities.add(new City("Durban", "South Africa", "Taxi", true));
         cities.add(new City("East London", "South Africa", "Taxi", true));
         cities.add(new City("Gaborone", "Botswana", "Combi", true));
         cities.add(new City("George", "South Africa", false));
         cities.add(new City("Johannesburg", "South Africa", "Taxi", true));
-        cities.add(new City("Kampala", "Uganda", "Matatu", true));
+        cities.add(new City("Kampala", "Uganda", "Kampala taxis", true));
         cities.add(new City("Lusaka", "Zambia", "Minibus", true));
         cities.add(new City("Nairobi", "Kenya", "Matatu", true));
         cities.add(new City("Oran", "Algeria", false));

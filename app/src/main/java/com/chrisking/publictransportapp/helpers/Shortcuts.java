@@ -351,47 +351,5 @@ public final class Shortcuts {
         }
     }
 
-    public static int mapOperatorNameToImage(String taxiName) {
-        switch (taxiName.toLowerCase()){
-
-            case "dar es salaam taxis":
-            case "daladala":
-                //TODO: Dar es Salaam
-                return R.drawable.alt;
-            case "combi":
-            case "gabarone kombi's":
-                //TODO: Gabarone Combis
-                return R.drawable.magicbus;
-            case "kigali taxis":
-                //TODO: Kigali Taxis
-                return R.drawable.magicbus;
-            case "minibus":
-            case "lusaka taxi project":
-            case "ma bus":
-                //TODO: Lusaka Taxis
-                return R.drawable.magicbus;
-            case "trotro":
-            case "g.p.r.t.u. (accra)":
-                //TODO: Accra Taxis
-                return R.drawable.dala;
-            case "matatu":
-            case "nairobi matatus":
-            case "digital matatus":
-            case "kampala taxis":
-                //TODO: Matatus, either Nairobi or Kampala
-                return R.drawable.magicbus;
-            case "nelson mandela bay taxi":
-            case "cape town taxi":
-            case "durban taxi project":
-            case "gauteng taxis":
-            case "buffalo city taxi":
-            case "taxi":
-                //TODO: SA Taxis
-                return R.drawable.magicbus;
-            default:
-                //TODO: Generic
-                return R.drawable.magicbus;
-        }
-    }
 
 }
