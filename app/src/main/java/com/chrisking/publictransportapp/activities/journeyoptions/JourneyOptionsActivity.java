@@ -1,8 +1,6 @@
 package com.chrisking.publictransportapp.activities.journeyoptions;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,16 +12,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.chrisking.publictransportapp.R;
-import com.chrisking.publictransportapp.activities.itinerary.ItineraryViewActivity;
-import com.chrisking.publictransportapp.activities.main.MainActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.chrisking.publictransportapp.services.location.LocationMonitoringService;
@@ -33,10 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import transportapisdk.JourneyBodyOptions;
 import transportapisdk.TransportApiClient;
 import transportapisdk.TransportApiClientSettings;
