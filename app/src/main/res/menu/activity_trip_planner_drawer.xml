@@ -18,9 +18,6 @@
             android:id="@+id/citySelect"
             android:title="@string/menu_city_select" />
         <item
-            android:id="@+id/surveyParticipate"
-            android:title="@string/menu_survey" />
-        <item
             android:id="@+id/settings"
             android:title="@string/menu_settings" />
         <item

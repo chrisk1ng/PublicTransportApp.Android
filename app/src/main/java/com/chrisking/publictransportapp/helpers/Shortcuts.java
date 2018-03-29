@@ -1,7 +1,9 @@
 package com.chrisking.publictransportapp.helpers;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,6 +39,16 @@ public final class Shortcuts {
                     }
                 })
                 .show();
+    }
+
+    public static boolean isMyServiceRunning(Context context, Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Date convertIsoDateTimeStringToDate(String isoDateTime)
@@ -151,9 +163,12 @@ public final class Shortcuts {
     {
         if (isNullOrWhitespace(isoDateTime))
             return "";
-
         Date date = convertIsoDateTimeStringToDate(isoDateTime);
+        return timeUntil(date);
+    }
 
+    public static String timeUntil(Date date)
+    {
         if (date == null)
             return "";
 
@@ -305,4 +320,51 @@ public final class Shortcuts {
         }
         return false;
     }
+
+    public static String mapOperatorNameToHtmlGuide(String taxiName) {
+        switch (taxiName.toLowerCase()){
+
+            case "dar es salaam taxis":
+            case "daladala":
+                //Dar es Salaam
+                return "file:///android_asset/daladala.htm";
+            case "combi":
+            case "gabarone kombi's":
+                //Gabarone
+                return "file:///android_asset/gabarone.htm";
+            case "kigali taxis":
+                //Kigali Taxis
+                return "file:///android_asset/kigali.htm";
+            case "minibus":
+            case "lusaka taxi project":
+            case "ma bus":
+                //Lusaka Taxis
+                return "file:///android_asset/lusaka.html";
+            case "trotro":
+            case "g.p.r.t.u. (accra)":
+                //Accra Taxis
+                return "file:///android_asset/trotro.htm";
+            case "matatu":
+            case "nairobi matatus":
+            case "digital matatus":
+                //Nairobi
+                return "file:///android_asset/matatu.htm";
+            case "kampala taxis":
+                //Kampala
+                return "file:///android_asset/kampala.htm";
+            case "nelson mandela bay taxi":
+            case "cape town taxi":
+            case "durban taxi project":
+            case "gauteng taxis":
+            case "buffalo city taxi":
+            case "taxi":
+                //SA Taxis
+                return "file:///android_asset/generic.htm";
+            default:
+                //Generic
+                return "file:///android_asset/generic.htm";
+        }
+    }
+
+
 }

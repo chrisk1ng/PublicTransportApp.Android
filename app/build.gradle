@@ -7,13 +7,13 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.chrisking.publictransportapp"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 14
-        versionName "1.6"
+        versionCode 15
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,19 +33,20 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'com.google.android.gms:play-services-location:10.2.1'
+    compile 'com.google.android.gms:play-services-maps:11.2.0'
+    compile 'com.google.android.gms:play-services-location:11.2.0'
     compile 'com.whereismytransport.transportapisdk:transportapisdk:1.0.1'
-    compile 'com.flurry.android:analytics:7.0.0@aar'
+    compile 'com.flurry.android:analytics:8.2.0@aar'
     compile 'com.github.ceryle:SegmentedButton:v1.2.2'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.uber.sdk:rides-android:0.6.1'
-    compile 'com.google.firebase:firebase-core:10.2.1'
-    compile 'com.google.firebase:firebase-messaging:10.2.1'
-    compile 'com.google.firebase:firebase-database:10.2.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.google.firebase:firebase-core:11.2.0'
+    compile 'com.google.firebase:firebase-messaging:11.2.0'
+    compile 'com.google.firebase:firebase-database:11.2.0'
+    compile 'com.google.firebase:firebase-invites:11.2.0'
+    compile 'com.android.support:design:25.4.0'
     testCompile 'junit:junit:4.12'
 }
 

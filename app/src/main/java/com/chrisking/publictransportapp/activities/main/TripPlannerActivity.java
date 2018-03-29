@@ -1,5 +1,7 @@
 package com.chrisking.publictransportapp.activities.main;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -15,18 +17,26 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.chrisking.publictransportapp.activities.learnmore.LearnMoreActivity;
+import com.chrisking.publictransportapp.activities.operatorguide.OperatorGuideActivity;
 import com.chrisking.publictransportapp.activities.plancommute.PlanCommuteActivity;
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.city.CityPersistence;
 import com.chrisking.publictransportapp.activities.city.CitySelectorActivity;
 import com.chrisking.publictransportapp.activities.queues.TaxiQueues;
 import com.chrisking.publictransportapp.activities.settings.AdvancedOptionsActivity;
+import com.chrisking.publictransportapp.activities.tripsharing.TripSharingActivity;
 import com.chrisking.publictransportapp.activities.whereto.WhereToActivity;
 import com.chrisking.publictransportapp.classes.City;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 public class TripPlannerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         FragmentManager.OnBackStackChangedListener {
+
+    private String savedCityTaxiName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +73,60 @@ public class TripPlannerActivity extends AppCompatActivity
             taxiQueues.setTitle(savedCity.getTaxiName() + " " + getString(R.string.menu_taxi_queues));
         }*/
 
+
+
         MenuItem taxiGuide = menuNav.findItem(R.id.taxiGuide);
         taxiGuide.setVisible(false);
-        /*if (!savedCity.getHasInformal()){
+        if (!savedCity.getHasInformal()){
             taxiGuide.setVisible(false);
         }
         else{
             taxiGuide.setVisible(true);
-            taxiGuide.setTitle(savedCity.getTaxiName() + " " + getString(R.string.menu_taxi_guide));
-        }*/
+            savedCityTaxiName = savedCity.getTaxiName();
+            taxiGuide.setTitle(savedCityTaxiName + " " + getString(R.string.menu_taxi_guide));
+        }
+
+
 
         TextView cityNameTextView = (TextView) navigationView.getHeaderView(0).findViewById(R.id.cityTextView);
         cityNameTextView.setText(savedCity.getName());
 
+        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData data) {
+                        if (data == null) {
+                            return;
+                        }
+
+                        // Get the deep link
+                        Uri deepLink = data.getLink();
+                        String uid = deepLink.getQueryParameter("uid");
+
+                        // Handle the deep link
+                        // [START_EXCLUDE]
+
+                        if (deepLink != null && uid != null) {
+                            Intent intent = new Intent(getApplicationContext(), TripSharingActivity.class);
+                            intent.putExtra("uid", uid);
+                            startActivity(intent);
+                        }
+                        // [END_EXCLUDE]
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
+
+    public final void startOperatorGuideActivity() {
+        Intent testIntent = new Intent(TripPlannerActivity.this, OperatorGuideActivity.class);
+        testIntent.putExtra(Intent.EXTRA_TEXT, savedCityTaxiName);
+
+        startActivity(testIntent);
     }
 
     @Override
@@ -148,11 +199,7 @@ public class TripPlannerActivity extends AppCompatActivity
             push.putExtra("menu", true);
             startActivity(push);
         }
-        else if (id == R.id.surveyParticipate) {
-            Intent push = new Intent(TripPlannerActivity.this, CitySelectorActivity.class);
-
-            startActivity(push);
-        } else if (id == R.id.settings) {
+        else if (id == R.id.settings) {
             Fragment myFragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.title_activity_advanced));
             if (myFragment == null || !myFragment.isVisible()) {
                 fragmentManager.beginTransaction()
@@ -168,10 +215,15 @@ public class TripPlannerActivity extends AppCompatActivity
                     .addToBackStack(getString(R.string.title_activity_learn_more))
                     .commit();
             }
+        } else if (id == R.id.taxiGuide)
+        {
+            startOperatorGuideActivity();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

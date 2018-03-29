@@ -72,13 +72,11 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
-                android:layout_weight="1"
                 map:srcCompat="@drawable/home" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:text="@string/home"
                 android:textAlignment="center" />
@@ -96,13 +94,11 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
-                android:layout_weight="1"
                 map:srcCompat="@drawable/work" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/work"
                 android:layout_marginStart="8dp"
                 android:textAlignment="center" />
@@ -125,6 +121,49 @@
             map:layout_constraintRight_toRightOf="parent"
             map:layout_constraintVertical_bias="0.179" />
 
+    <LinearLayout
+        android:id="@+id/activeTripLayout"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintLeft_toLeftOf="parent"
+        map:layout_constraintRight_toRightOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintVertical_bias="0.179">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0"
+            android:background="@drawable/ic_menu_share" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:text="@string/trip_share_active_trip"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/tripShareStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:layout_weight="0"
+            android:background="@drawable/action_button_rounded_corners"
+            android:text="@string/trip_share_stop"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
         <Button
             android:id="@+id/regionSupport"
             android:layout_width="0dp"
@@ -141,10 +180,11 @@
             map:layout_constraintTop_toTopOf="parent"
             map:layout_constraintVertical_bias="0.179" />
 
+
     <LinearLayout
         android:id="@+id/whereToLayout"
         android:layout_width="260dp"
-        android:layout_height="48dp"
+        android:layout_height="58dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/shadow"
         android:elevation="1dp"
@@ -155,7 +195,7 @@
         map:layout_constraintLeft_toLeftOf="parent"
         map:layout_constraintRight_toRightOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        map:layout_constraintVertical_bias="0.19999999">
+        map:layout_constraintVertical_bias="0.18">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,41 +206,57 @@
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:paddingLeft="12dp"
-                android:paddingTop="6dp"
+                android:layout_height="23dp"
+                android:paddingStart="12dp"
+                android:paddingTop="3dp"
                 android:text="@string/where_to"
                 android:textColor="@android:color/black"
-                android:textSize="18dp"
-                tools:layout_editor_absoluteX="162dp"
-                tools:layout_editor_absoluteY="64dp" />
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView24"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="12dp"
+                android:layout_height="16dp"
+                android:paddingStart="12dp"
+                android:paddingTop="1dp"
                 android:text="@string/where_to_destination_hint"
                 android:textColor="@color/colorWalking"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="12dp"
+
+                android:text="@string/where_to_change_location"
+                android:textColor="@color/colorLinks"
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/filter"
             android:layout_width="58dp"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_weight="0.25">
 
             <ImageView
                 android:id="@+id/filterImage"
                 android:layout_width="36dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="4dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/filter" />
-        </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:paddingTop="1dp"
+                android:text="@string/where_to_options"
+                android:textColor="@color/colorLinks"
+                android:textSize="12sp" />
+        </LinearLayout>
 
     </LinearLayout>
 

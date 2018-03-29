@@ -5,12 +5,14 @@ import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.map.ViewOnMapActivity;
+import com.chrisking.publictransportapp.activities.operatorguide.OperatorGuideActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.flurry.android.FlurryAgent;
@@ -50,6 +52,8 @@ class LegHolder extends RecyclerView.ViewHolder {
     private String mStartPoint;
     private String mEndPoint;
 
+    private Button mGuideButton;
+
     LegHolder(View v) {
         super(v);
 
@@ -72,9 +76,11 @@ class LegHolder extends RecyclerView.ViewHolder {
         mLeftLineLayout = (LinearLayout) v.findViewById(R.id.leftLine);
         mRightLineLayout = (LinearLayout) v.findViewById(R.id.rightLine);
         mUberButton = (RideRequestButton) v.findViewById(R.id.uberButton);
+        mGuideButton = (Button) v.findViewById(R.id.guideButton);
     }
 
-    public void bindLeg(Leg leg, int position, boolean isFirstLeg, boolean isLastLeg, boolean isCommute, boolean isCommuteHome) {
+
+    public void bindLeg(final Leg leg, int position, boolean isFirstLeg, boolean isLastLeg, boolean isCommute, boolean isCommuteHome) {
         mLegPosition = position;
 
         if (isFirstLeg)
@@ -93,6 +99,19 @@ class LegHolder extends RecyclerView.ViewHolder {
                 ApplicationExtension.getContext().startActivity(push);
             }
         });
+
+        mGuideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent push = new Intent(ApplicationExtension.getContext(), OperatorGuideActivity.class);
+                push.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                String agencyName = leg.getLine().getAgency().getName();
+                push.putExtra(Intent.EXTRA_TEXT, agencyName);
+                ApplicationExtension.getContext().startActivity(push);
+            }
+        });
+
         mServiceAlerts.setVisibility(View.INVISIBLE);
         mServiceAlertsHeader.setVisibility(View.INVISIBLE);
 
@@ -157,7 +176,7 @@ class LegHolder extends RecyclerView.ViewHolder {
             mApproxCostHeader.setVisibility(View.VISIBLE);
 
             mVehicle.setText("");
-            mUberButton.setVisibility(View.INVISIBLE);
+            mUberButton.setVisibility(View.GONE);
 
             if (leg.getLine() != null) {
                 if (leg.getLine().getAgency() != null)
@@ -165,11 +184,21 @@ class LegHolder extends RecyclerView.ViewHolder {
 
                 mInnerLayout.setBackgroundColor(getBackgroundColor(leg.getLine().getColour()));
                 mLineName.setText(leg.getLine().getName());
-                mMode.setImageResource(Shortcuts.mapModeImage72(leg.getLine().getMode()));
+
+
+
+                String mode = leg.getLine().getMode();
+                if (mode.toLowerCase().equals("sharetaxi")){
+                    mGuideButton.setVisibility(View.VISIBLE);
+                } else {
+                    mGuideButton.setVisibility(View.GONE);
+                }
+
+                mMode.setImageResource(Shortcuts.mapModeImage72(mode));
 
                 if (leg.getVehicle() != null){
                     if (leg.getVehicle().getDesignation() != null)
-                        mVehicle.setText(Shortcuts.mapModeToText(leg.getLine().getMode()) + " " + leg.getVehicle().getDesignation());
+                        mVehicle.setText(Shortcuts.mapModeToText(mode) + " " + leg.getVehicle().getDesignation());
                 }
             }
         }
@@ -224,7 +253,7 @@ class LegHolder extends RecyclerView.ViewHolder {
                 mUberButton.setVisibility(View.VISIBLE);
             }
             else{
-                mUberButton.setVisibility(View.INVISIBLE);
+                mUberButton.setVisibility(View.GONE);
             }
         }
     }

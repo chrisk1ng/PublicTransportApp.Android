@@ -1,8 +1,12 @@
 package com.chrisking.publictransportapp.activities.journeyoptions;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +22,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chrisking.publictransportapp.Manifest;
 import com.chrisking.publictransportapp.activities.itinerary.ItineraryViewActivity;
 import com.chrisking.publictransportapp.R;
 import com.chrisking.publictransportapp.activities.map.ViewOnMapActivity;
+import com.chrisking.publictransportapp.activities.whereto.WhereToActivity;
 import com.chrisking.publictransportapp.helpers.ApplicationExtension;
 import com.chrisking.publictransportapp.helpers.Shortcuts;
 import com.flurry.android.FlurryAgent;
@@ -30,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import transportapisdk.models.Itinerary;
+import transportapisdk.models.Journey;
 import transportapisdk.models.Leg;
 import transportapisdk.models.Waypoint;
 
@@ -39,17 +46,22 @@ import transportapisdk.models.Waypoint;
 
 public class JourneyAdapter extends ArrayAdapter<Itinerary> {
 
+    private JourneyOptionsActivity journeyOptionsActivity;
+
     final String mWalkFarNightText = "- it's far, so stay safe at night or choose a different trip";
     final String mWalkFarDayText = "- it's far, but at least it's light out";
 
     public JourneyAdapter(Context context, ArrayList<Itinerary> itineraries) {
         super(context, 0, itineraries);
+
+        journeyOptionsActivity = (JourneyOptionsActivity) context;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Itinerary itinerary = getItem(position);
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.itinerary_list_item, parent, false);
@@ -62,6 +74,7 @@ public class JourneyAdapter extends ArrayAdapter<Itinerary> {
         TextView startTime = (TextView) convertView.findViewById(R.id.startTime);
         TextView endTime = (TextView) convertView.findViewById(R.id.endTime);
         TextView cost = (TextView) convertView.findViewById(R.id.cost);
+        ImageView shareTrip = (ImageView) convertView.findViewById(R.id.shareTripImage);
         RecyclerView modes = (RecyclerView) convertView.findViewById(R.id.modes);
 
         // Populate the data into the template view using the data object
@@ -80,6 +93,35 @@ public class JourneyAdapter extends ArrayAdapter<Itinerary> {
         // Cache row position inside the button using `setTag`
         selectJourneyButton.setTag(position);
         showOnMapButton.setTag(position);
+
+        shareTrip.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 new AlertDialog.Builder(view.getContext())
+                         .setTitle(R.string.trip_share_alert_title)
+                         .setMessage(R.string.trip_share_alert_message)
+                         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                             public void onClick(DialogInterface dialog, int which) {
+                                 if (journeyOptionsActivity.checkPermissions()){
+                                     // Continue
+                                     journeyOptionsActivity.startLocationService(position);
+                                 }
+                                 else{
+                                     journeyOptionsActivity.requestPermissions();
+
+                                 }
+
+                                 dialog.dismiss();
+                             }
+                         })
+                         .setNegativeButton(R.string.not_now, new DialogInterface.OnClickListener() {
+                             public void onClick(DialogInterface dialog, int which) {
+                                 dialog.dismiss();
+                             }
+                         })
+                         .show();
+             }
+         });
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

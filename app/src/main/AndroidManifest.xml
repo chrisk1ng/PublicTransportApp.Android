@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -22,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service android:name=".services.geofencing.GeofenceTrasitionService" />
+        <service android:name=".services.location.LocationMonitoringService" />
 
         <activity
             android:name=".activities.main.MainActivity"
@@ -60,6 +62,9 @@
         <activity
             android:name=".activities.whereto.FilterOverlay"
             android:theme="@style/AppTheme.Popup" />
+        <activity
+            android:name=".activities.operatorguide.OperatorGuideActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".services.notification.NotificationService">
             <intent-filter>
@@ -121,7 +126,16 @@
         <activity
             android:name=".activities.main.TripPlannerActivity"
             android:label="@string/title_activity_where_to"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="enc6m.app.goo.gl" />
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.queues.TaxiQueueSetupActivity"
             android:theme="@style/NoTitle" />
@@ -131,7 +145,10 @@
             android:label="@string/title_activity_search" />
         <activity
             android:name=".activities.search.ChooseLocationActivity"
-            android:label="@string/title_activity_choose_location"></activity>
+            android:label="@string/title_activity_choose_location" />
+        <activity
+            android:name=".activities.tripsharing.TripSharingActivity"
+            android:label="@string/title_activity_trip_sharing"></activity>
     </application>
 
 </manifest>
