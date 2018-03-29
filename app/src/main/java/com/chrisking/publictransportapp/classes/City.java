@@ -1,6 +1,7 @@
 package com.chrisking.publictransportapp.classes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by ChrisKing on 2017/07/08.
@@ -54,14 +55,14 @@ public class City {
         cities.add(new City("Cape Town", "South Africa", "Taxi", true));
         cities.add(new City("Casablanca", "Morocco", false));
         cities.add(new City("Constantine", "Algeria", false));
-        cities.add(new City("Dar es Salaam", "Tanzania", false));
+        cities.add(new City("Dar es Salaam", "Tanzania", "Daladala", true));
         cities.add(new City("Dubai", "UAE", false));
         cities.add(new City("Durban", "South Africa", "Taxi", true));
         cities.add(new City("East London", "South Africa", "Taxi", true));
         cities.add(new City("Gaborone", "Botswana", "Combi", true));
         cities.add(new City("George", "South Africa", false));
         cities.add(new City("Johannesburg", "South Africa", "Taxi", true));
-        cities.add(new City("Kampala", "Uganda", "Matatu", true));
+        cities.add(new City("Kampala", "Uganda", "Kampala taxis", true));
         cities.add(new City("Lusaka", "Zambia", "Minibus", true));
         cities.add(new City("Nairobi", "Kenya", "Matatu", true));
         cities.add(new City("Oran", "Algeria", false));
@@ -70,6 +71,15 @@ public class City {
         cities.add(new City("Salé", "Morocco", false));
         cities.add(new City("Tshwane", "South Africa", "Taxi", true));
         cities.add(new City("Other", "Unknown", false));
+        cities.add(new City("Kigali", "Rwanda", "Kigali taxis", true));
+
+        java.util.Collections.sort(cities,new Comparator<City>() {
+            @Override
+            public int compare(City p1, City p2) {
+                // return p1.age+"".compareTo(p2.age+""); //sort by age
+                return p1.name.compareTo(p2.name); // if you want to short by name
+            }
+        });
 
         return cities;
     }
