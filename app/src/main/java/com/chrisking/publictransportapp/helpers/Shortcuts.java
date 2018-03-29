@@ -312,7 +312,7 @@ public final class Shortcuts {
             case "dar es salaam taxis":
             case "daladala":
                 //TODO: Dar es Salaam
-                return "file:///android_asset/daladala.html";
+                return "file:///android_asset/daladala.htm";
             case "combi":
             case "gabarone kombi's":
                 //TODO: Gabarone Combis
@@ -344,7 +344,7 @@ public final class Shortcuts {
             case "buffalo city taxi":
             case "taxi":
                 //SA Taxis
-                return "file:///android_asset/matatu.htm";
+                return "file:///android_asset/generic.htm";
             default:
                 //Generic
                 return "file:///android_asset/generic.htm";

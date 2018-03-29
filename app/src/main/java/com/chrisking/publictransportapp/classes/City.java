@@ -54,7 +54,7 @@ public class City {
         cities.add(new City("Cape Town", "South Africa", "Taxi", true));
         cities.add(new City("Casablanca", "Morocco", false));
         cities.add(new City("Constantine", "Algeria", false));
-        cities.add(new City("Dar es Salaam", "Tanzania", "daladala", true));
+        cities.add(new City("Dar es Salaam", "Tanzania", "Daladala", true));
         cities.add(new City("Dubai", "UAE", false));
         cities.add(new City("Durban", "South Africa", "Taxi", true));
         cities.add(new City("East London", "South Africa", "Taxi", true));
