@@ -306,44 +306,92 @@ public final class Shortcuts {
         return false;
     }
 
-    public static int MapOperatorNameToGuideName(String taxiName) {
+    public static String mapOperatorNameToHtmlGuide(String taxiName) {
         switch (taxiName.toLowerCase()){
 
             case "dar es salaam taxis":
             case "daladala":
                 //TODO: Dar es Salaam
-                return R.raw.generic;
+                return "file:///android_asset/daladala.html";
             case "combi":
             case "gabarone kombi's":
                 //TODO: Gabarone Combis
-                return R.raw.generic;
+                return "file:///android_asset/generic.htm";
             case "kigali taxis":
-                //TODO: Kigali Taxis
-                return R.raw.generic;
+                //Kigali Taxis - default to generic
+                return "file:///android_asset/generic.htm";
             case "minibus":
             case "lusaka taxi project":
             case "ma bus":
-                //TODO: Lusaka Taxis
-                return R.raw.generic;
+                //Lusaka Taxis
+                return "file:///android_asset/lusaka.html";
             case "trotro":
             case "g.p.r.t.u. (accra)":
-                //TODO: Accra Taxis
-                return R.raw.generic;
+                //Accra Taxis
+                return "file:///android_asset/trotro.htm";
             case "matatu":
             case "nairobi matatus":
             case "digital matatus":
+                //Nairobi
+                return "file:///android_asset/matatu.htm";
             case "kampala taxis":
-                //TODO: Matatus, either Nairobi or Kampala
-                return R.raw.generic;
+                //Kampala
+                return "file:///android_asset/kampala.htm";
             case "nelson mandela bay taxi":
             case "cape town taxi":
             case "durban taxi project":
             case "gauteng taxis":
             case "buffalo city taxi":
             case "taxi":
+                //SA Taxis
+                return "file:///android_asset/matatu.htm";
             default:
-                //TODO: SA Taxis
-                return R.raw.generic;
+                //Generic
+                return "file:///android_asset/generic.htm";
         }
     }
+
+    public static int mapOperatorNameToImage(String taxiName) {
+        switch (taxiName.toLowerCase()){
+
+            case "dar es salaam taxis":
+            case "daladala":
+                //TODO: Dar es Salaam
+                return R.drawable.alt;
+            case "combi":
+            case "gabarone kombi's":
+                //TODO: Gabarone Combis
+                return R.drawable.magicbus;
+            case "kigali taxis":
+                //TODO: Kigali Taxis
+                return R.drawable.magicbus;
+            case "minibus":
+            case "lusaka taxi project":
+            case "ma bus":
+                //TODO: Lusaka Taxis
+                return R.drawable.magicbus;
+            case "trotro":
+            case "g.p.r.t.u. (accra)":
+                //TODO: Accra Taxis
+                return R.drawable.dala;
+            case "matatu":
+            case "nairobi matatus":
+            case "digital matatus":
+            case "kampala taxis":
+                //TODO: Matatus, either Nairobi or Kampala
+                return R.drawable.magicbus;
+            case "nelson mandela bay taxi":
+            case "cape town taxi":
+            case "durban taxi project":
+            case "gauteng taxis":
+            case "buffalo city taxi":
+            case "taxi":
+                //TODO: SA Taxis
+                return R.drawable.magicbus;
+            default:
+                //TODO: Generic
+                return R.drawable.magicbus;
+        }
+    }
+
 }
