@@ -143,9 +143,6 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
             for (List<Double> coordinates : line.getCoordinates()) {
                 LatLng coordinate = new LatLng(coordinates.get(1), coordinates.get(0));
                 polylineOptions.add(coordinate);
-                if (mItineraryNumber == -1 || mItineraryNumber == count) {
-                    builder.include(coordinate);
-                }
             }
             mMap.addPolyline(polylineOptions);
 
@@ -155,47 +152,37 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
         // move camera to zoom on map
         int padding = 50;
         /**create the bounds from latlngBuilder to set into map camera*/
-        LatLngBounds bounds = builder.build();
         /**create the camera with bounds and padding to set into map*/
-        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+        mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onMapLoaded() {
-                /**set animated zoom camera into map*/
-                mMap.animateCamera(cu);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                String value = dataSnapshot.getValue().toString();
+                drawMarker(key, value);
+            }
 
-                mDatabase.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        String key = dataSnapshot.getKey();
-                        String value = dataSnapshot.getValue().toString();
-                        drawMarker(key, value);
-                    }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                String value = dataSnapshot.getValue().toString();
+                drawMarker(key, value);
+            }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        String key = dataSnapshot.getKey();
-                        String value = dataSnapshot.getValue().toString();
-                        drawMarker(key, value);
-                    }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                mMarker.remove();
+                String key = dataSnapshot.getKey();
+                if(key.equals("latitude")){
+                    showTripSharingEnded();
+                }
+            }
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        mMarker.remove();
-                        String key = dataSnapshot.getKey();
-                        if(key.equals("latitude")){
-                            showTripSharingEnded();
-                        }
-                    }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
