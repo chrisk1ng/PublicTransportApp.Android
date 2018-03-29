@@ -126,7 +126,16 @@
         <activity
             android:name=".activities.main.TripPlannerActivity"
             android:label="@string/title_activity_where_to"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="enc6m.app.goo.gl" />
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.queues.TaxiQueueSetupActivity"
             android:theme="@style/NoTitle" />

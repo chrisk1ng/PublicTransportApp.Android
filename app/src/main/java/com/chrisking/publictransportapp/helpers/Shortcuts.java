@@ -163,9 +163,12 @@ public final class Shortcuts {
     {
         if (isNullOrWhitespace(isoDateTime))
             return "";
-
         Date date = convertIsoDateTimeStringToDate(isoDateTime);
+        return timeUntil(date);
+    }
 
+    public static String timeUntil(Date date)
+    {
         if (date == null)
             return "";
 

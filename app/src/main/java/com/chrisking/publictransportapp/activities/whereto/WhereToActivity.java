@@ -58,10 +58,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 
 import java.util.Date;
 import java.util.List;
@@ -206,7 +209,7 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
             }
         });
 
-        mFilterButton = (LinearLayout) view.findViewById(R.id.filter);
+        mFilterButton = (LinearLayout) view.findViewById(R.id.filter) ;
         mFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,24 +290,47 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    public void sendShareLink(String uid){
-        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+    public void sendShareLink(final String uid){
+
+        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLink(Uri.parse("https://insta.trip?uid=" + uid))
                 .setDynamicLinkDomain("enc6m.app.goo.gl")
-                // Open links with this app on Android
                 .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
-                // Open links with com.example.ios on iOS
-                //.setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
-                .buildDynamicLink();
+                .buildShortDynamicLink()
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<ShortDynamicLink>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ShortDynamicLink> task) {
+                        Uri dynamicLinkUri;
 
-        Uri dynamicLinkUri = dynamicLink.getUri();
+                        if (task.isSuccessful()) {
+                            // Short link created
+                            //Uri flowchartLink = task.getResult().getPreviewLink();
 
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        String shareBody = dynamicLinkUri.toString();
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "InstaTrip");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                            dynamicLinkUri = task.getResult().getShortLink();
+
+                        } else {
+                            // Error
+
+                            DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                    .setLink(Uri.parse("https://insta.trip?uid=" + uid))
+                                    .setDynamicLinkDomain("enc6m.app.goo.gl")
+                                    // Open links with this app on Android
+                                    .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+                                    // Open links with com.example.ios on iOS
+                                    //.setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
+                                    .buildDynamicLink();
+
+                            dynamicLinkUri = dynamicLink.getUri();
+                        }
+
+                        String shareText = getResources().getString(R.string.trip_share_share_text) + " " + dynamicLinkUri.toString();
+                        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        sharingIntent.setType("text/plain");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "InstaTrip");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+                        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                    }
+                });
     }
 
     private void showOnTrip(boolean forced){

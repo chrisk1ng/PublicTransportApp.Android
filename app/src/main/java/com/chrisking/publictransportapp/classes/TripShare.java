@@ -8,9 +8,18 @@ public class TripShare {
     private String uid;
     private String latitude;
     private String longitude;
+    private long datetime;
 
     public String getUid() {
         return uid;
+    }
+
+    public long getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(long value) {
+        this.datetime = value;
     }
 
     public void setUid(String value) {

@@ -202,6 +202,7 @@
     <string name="trip_share_active_trip">You\'re currently on a trip.</string>
     <string name="trip_share_alert_already_sharing">You\'re already sharing a trip, please stop the current trip before sharing this one.</string>
     <string name="trip_share_alert_sharing_ended">Your friend is no longer sharing their trip.</string>
+    <string name="trip_share_share_text">Hey, I\'m using Instatrip to share my journey. You can follow along here: </string>
     <string name="trip_share_stop">STOP</string>
 
     <string name="taxiguide_select">"Taxi Guide"</string>
