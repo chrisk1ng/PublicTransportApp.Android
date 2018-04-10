@@ -147,7 +147,7 @@
     <string name="about_intro">My name is Chris King, one of the co-founders of WhereIsMyTransport.</string>
     <string name="about_why">I built this app for fun and to demonstrate some of the capabilities of our platform.</string>
     <string name="about_sayhi">Seen as you made it this far, why not say hi on one of the channels below?</string>
-    <string name="about_version">v1.7</string>
+    <string name="about_version">v1.7.1</string>
     <string name="about_open_source_title">Open source libraries used:</string>
     <string name="about_transport_api_sdk"><a href="https://github.com/WhereIsMyTransport/TransportApiSdk.Java">TransportApiSdk</a></string>
     <string name="about_segmented_button"><a href="https://github.com/ceryle/SegmentedButton">SegmentedButton</a></string>

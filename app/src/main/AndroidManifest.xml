@@ -25,10 +25,6 @@
         <service android:name=".services.geofencing.GeofenceTrasitionService" />
         <service android:name=".services.location.LocationMonitoringService" />
 
-        <activity
-            android:name=".activities.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoTitle" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -116,6 +112,7 @@
         <activity
             android:name=".activities.city.CitySelectorActivity"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -126,6 +123,7 @@
         <activity
             android:name=".activities.main.TripPlannerActivity"
             android:label="@string/title_activity_where_to"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -138,16 +136,20 @@
         </activity>
         <activity
             android:name=".activities.queues.TaxiQueueSetupActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitle" />
         <activity android:name=".activities.queues.TaxiQueueConfigureActivity" />
         <activity
             android:name=".activities.search.SearchActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_search" />
         <activity
             android:name=".activities.search.ChooseLocationActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_choose_location" />
         <activity
             android:name=".activities.tripsharing.TripSharingActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_trip_sharing"></activity>
     </application>
 
