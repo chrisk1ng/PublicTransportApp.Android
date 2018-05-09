@@ -53,7 +53,7 @@ public class TripSharingActivity extends FragmentActivity implements OnMapReadyC
     public Marker mMarker;
 
     // Define the api client.
-    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret()));
+    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret(),60, ApplicationExtension.UniqueContextId()));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

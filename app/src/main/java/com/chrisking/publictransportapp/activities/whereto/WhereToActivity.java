@@ -691,12 +691,15 @@ public class WhereToActivity extends Fragment implements OnMapReadyCallback,
         });
     }
 
-    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret()));
+    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret(), 60, ApplicationExtension.UniqueContextId()));
 
     private class GetAgenciesTask extends AsyncTask<Void, Void, TransportApiResult<List<Agency>>> {
 
         protected TransportApiResult<List<Agency>> doInBackground(Void... params){
-            TransportApiResult<List<Agency>> agencies = defaultClient.getAgenciesNearby(AgencyQueryOptions.defaultQueryOptions(), mStartLocation.latitude, mStartLocation.longitude, 5000);
+            AgencyQueryOptions options = AgencyQueryOptions.defaultQueryOptions();
+            //options.uniqueContextId = "1234";
+
+            TransportApiResult<List<Agency>> agencies = defaultClient.getAgenciesNearby(options, mStartLocation.latitude, mStartLocation.longitude, 5000);
 
             return agencies;
         }

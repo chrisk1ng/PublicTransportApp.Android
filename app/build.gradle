@@ -15,8 +15,8 @@ android {
         applicationId "com.chrisking.publictransportapp"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 16
-        versionName "1.7.1"
+        versionCode 17
+        versionName "1.7.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,25 +36,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.android.gms:play-services-maps:11.2.0'
-    compile 'com.google.android.gms:play-services-location:11.2.0'
-    compile 'com.whereismytransport.transportapisdk:transportapisdk:1.0.1'
-    compile 'com.flurry.android:analytics:8.2.0@aar'
-    compile 'com.github.ceryle:SegmentedButton:v1.2.2'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.uber.sdk:rides-android:0.6.1'
-    compile 'com.google.firebase:firebase-core:11.2.0'
-    compile 'com.google.firebase:firebase-messaging:11.2.0'
-    compile 'com.google.firebase:firebase-database:11.2.0'
-    compile 'com.google.firebase:firebase-invites:11.2.0'
-    compile 'com.android.support:design:25.4.0'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.android.gms:play-services-maps:11.2.0'
+    implementation 'com.google.android.gms:play-services-location:11.2.0'
+    implementation 'com.whereismytransport.transportapisdk:transportapisdk:1.0.3'
+    implementation 'com.flurry.android:analytics:8.2.0@aar'
+    implementation 'com.github.ceryle:SegmentedButton:v1.2.2'
+    implementation 'com.android.support:recyclerview-v7:25.4.0'
+    implementation 'com.uber.sdk:rides-android:0.6.1'
+    implementation 'com.google.firebase:firebase-core:11.2.0'
+    implementation 'com.google.firebase:firebase-messaging:11.2.0'
+    implementation 'com.google.firebase:firebase-database:11.2.0'
+    implementation 'com.google.firebase:firebase-invites:11.2.0'
+    implementation 'com.android.support:design:25.4.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
 }
 
 

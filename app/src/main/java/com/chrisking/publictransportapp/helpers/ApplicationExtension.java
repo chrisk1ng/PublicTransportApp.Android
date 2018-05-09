@@ -2,6 +2,8 @@ package com.chrisking.publictransportapp.helpers;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.chrisking.publictransportapp.classes.UniqueContext;
 import com.flurry.android.FlurryAgent;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,7 +19,9 @@ public class ApplicationExtension extends Application {
     private ArrayList<Itinerary> mItineraries;
     private static Context mContext;
     private String tripShareId;
+    private static String uniqueContextId;
 
+    public static String UniqueContextId() { return uniqueContextId; }
     public String getTripShareId() {return tripShareId;}
     public boolean getIsBackgroundServiceRunning() {return backgroundServiceRunning;}
     public boolean getIsCommute() {return mIsCommute;}
@@ -44,6 +48,10 @@ public class ApplicationExtension extends Application {
         {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         }
+
+        UniqueContext uniqueContext = new UniqueContext(mContext);
+        uniqueContext.setUniqueContext();
+        uniqueContextId = uniqueContext.getUniqueContext();
 
         new FlurryAgent.Builder()
                 .build(this, Credentials.FlurryKey);

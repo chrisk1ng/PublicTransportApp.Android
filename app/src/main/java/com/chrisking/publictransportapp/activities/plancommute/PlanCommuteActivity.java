@@ -747,7 +747,7 @@ public class PlanCommuteActivity extends Fragment implements OnMapReadyCallback,
         });
     }
 
-    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret()));
+    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret(),60, ApplicationExtension.UniqueContextId()));
 
     private class GetAgenciesTask extends AsyncTask<Void, Void, TransportApiResult<List<Agency>>> {
 

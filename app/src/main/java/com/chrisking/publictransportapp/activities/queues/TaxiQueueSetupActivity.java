@@ -431,7 +431,7 @@ public class TaxiQueueSetupActivity extends AppCompatActivity implements Locatio
                 .build();
     }
 
-    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret()));
+    protected TransportApiClient defaultClient = new TransportApiClient(new TransportApiClientSettings(ApplicationExtension.ClientId(), ApplicationExtension.ClientSecret(), 60, ApplicationExtension.UniqueContextId()));
 
     private class GetStopsTask extends AsyncTask<Void, Void, TransportApiResult<List<Stop>>> {
 
